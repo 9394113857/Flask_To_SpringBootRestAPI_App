@@ -1,0 +1,31 @@
+# Option 1: Soft Undo (Remove the last commit, keep changes staged)
+# 1. Reset the most recent commit but keep the changes staged.
+git reset --soft HEAD~1
+
+# 2. Recommit the changes with a new message or updates if needed.
+git commit -m "New commit message or changes if needed"
+
+# 3. Push the updated commit history to the remote repository, overwriting the previous commit on GitHub.
+git push --force
+
+
+# Option 2: Hard Undo (Remove the last commit and discard changes)
+# 1. Reset the most recent commit, completely discarding any changes from it.
+git reset --hard HEAD~1
+
+# 2. Force-push the updated commit history to the remote repository to remove the commit from GitHub.
+git push --force
+
+
+# Option 3: Delete a Specific Commit (Further back in history)
+# 1. Find the commit ID you want to delete by viewing the commit history.
+git log
+
+# 2. Begin an interactive rebase from the commit before the one you want to delete.
+#    Replace <commit-id> with the ID of the commit you want to delete.
+git rebase -i <commit-id>^
+
+# 3. In the editor that opens, delete the line for the commit you want to remove, then save and close the editor.
+
+# 4. Push the updated commit history to GitHub with --force to apply the change.
+git push --force
